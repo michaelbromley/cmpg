@@ -1,0 +1,17 @@
+{
+  "name": "cmpg",
+  "version": "0.0.1",
+  "description": "A super simple scaffolding tool for Angular 2 components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "cmpg": "./index.js"
+  },
+  "author": "Michael Bromley <michael@michaelbromley.co.uk>",
+  "license": "MIT",
+  "dependencies": {
+    "mustache": "^2.2.1"
+  }
+}
