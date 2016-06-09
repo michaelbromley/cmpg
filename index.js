@@ -13,7 +13,7 @@ const sassTemplate = fs.readFileSync(path.join(__dirname, './templates/component
 // ensure a component name argument has been specified.
 const componentName = process.argv[2];
 if (!componentName) {
-    console.log('Error: No component name specified: cmpg my-component-name');
+    console.log('Error: No component name specified. Correct syntax is `cmpg my-component-name`');
     process.exit(1);
 }
 
@@ -25,6 +25,15 @@ let context = { componentName, className };
 fs.writeFile(`${componentName}.component.ts`, mustache.render(typescriptTemplate, context));
 fs.writeFile(`${componentName}.component.html`, mustache.render(htmlTemplate, context));
 fs.writeFile(`${componentName}.scss`, mustache.render(sassTemplate, context));
+
+console.log(`Created the ${componentName} component in the current directory.`);
+
+/**
+ * Converts kebab-case to PascalCase.
+ */
+function kebabToPascal(string) {
+    return capitalizeFirstLetter(string.replace(/-([a-z])/g, match => match[1].toUpperCase()));
+}
 
 /**
  * Converts kebab-case to PascalCase.
