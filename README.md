@@ -1,8 +1,13 @@
 # cmpg (Component Generator)
 
-This is an ultra-simple cli tool for generating Angular2 component scaffolding.
-Currently my personal template is hard-coded, but a good enhancement would be
-to somehow allow different template files to be specified.
+This is an ultra-simple cli tool for generating Angular2 component scaffolding, with naming conventions 
+taken from the [Angular 2 Style Guide](https://angular.io/styleguide)
+
+
+### Templates
+Currently the templates reflect my personal use-case, which is a webpack-based build using
+Sass for styles. A good enhancement would be to somehow allow different template files to be specified.
+
 
 ### Usage
 
@@ -15,8 +20,32 @@ But it can be used like this:
 3. `cmpg my-component`
 
 
-That will generate a TypeScript, HTML and SASS file named according to
-the argument passed.
+That will generate a TypeScript, HTML and Sass file named according to
+the argument passed:
+
+`> cmpg foo-selector`
+
+result:
+
+```
+./
+  |- foo-selector.component.ts
+  |- foo-selector.component.html
+  |- foo-selector.scss
+```
+
+The TypeScript file will look like this:
+```TypeScript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'foo-selector',
+  template: require('./foo-selector.component.html'),
+  styles: [require('./foo-selector.scss').toString()]
+})
+export class FooSelectorComponent {
+}
+```
 
 If the templates are not to your liking, just go in `templates/` and
 edit away. Make sure to run step 2 again after making any changes.
