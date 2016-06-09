@@ -5,21 +5,33 @@ const fs = require('fs');
 const path = require('path');
 const mustache = require('mustache');
 
+// load the mustache templates.
 const htmlTemplate = fs.readFileSync(path.join(__dirname, './templates/component-webpack/html.mustache'), 'utf8');
 const typescriptTemplate = fs.readFileSync(path.join(__dirname, './templates/component-webpack/typescript.mustache'), 'utf8');
 const sassTemplate = fs.readFileSync(path.join(__dirname, './templates/component-webpack/sass.mustache'), 'utf8');
 
+// ensure a component name argument has been specified.
 const componentName = process.argv[2];
 if (!componentName) {
     console.log('Error: No component name specified: cmpg my-component-name');
     process.exit(1);
 }
-const className = capitalizeFirstLetter(componentName.replace(/-([a-z])/g, match => match[1].toUpperCase()));
+
+
+const className = kebabToPascal(componentName) + 'Component';
 let context = { componentName, className };
 
+// output the component files.
 fs.writeFile(`${componentName}.component.ts`, mustache.render(typescriptTemplate, context));
 fs.writeFile(`${componentName}.component.html`, mustache.render(htmlTemplate, context));
 fs.writeFile(`${componentName}.scss`, mustache.render(sassTemplate, context));
+
+/**
+ * Converts kebab-case to PascalCase.
+ */
+function kebabToPascal(string) {
+    return capitalizeFirstLetter(string.replace(/-([a-z])/g, match => match[1].toUpperCase()));
+}
 
 /**
  * Does what it says on the tin.
