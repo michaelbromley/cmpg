@@ -42,13 +42,6 @@ function kebabToPascal(string) {
 }
 
 /**
- * Converts kebab-case to PascalCase.
- */
-function kebabToPascal(string) {
-    return capitalizeFirstLetter(string.replace(/-([a-z])/g, match => match[1].toUpperCase()));
-}
-
-/**
  * Does what it says on the tin.
  */
 function capitalizeFirstLetter(string) {
