@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 
 @Component({
     selector: '{{componentName}}',
-    template: require('./{{componentName}}.component.html'),
-    styles: [require('./{{componentName}}.scss').toString()]
+    templateUrl: './{{componentName}}.component.html',
+    styleUrls: ['./{{componentName}}.scss']
 })
 export class {{className}} {}
